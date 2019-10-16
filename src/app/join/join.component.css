@@ -1,0 +1,39 @@
+.mgTop20 {
+    margin-top: 20px;
+}
+.mgRight10 {
+    margin-right: 10px;
+}
+.mgBtm20 {
+    margin-bottom: 20px;
+}
+.width100 {
+    width: 100%;
+}
+.copyInput {
+    height: 40px;
+    border-radius: 5px;
+}
+.centerAlign {
+    text-align: center;
+}
+
+/*mobile*/
+@media only screen and (max-width: 767px) {
+    .mgBtm20Mob {
+        margin-bottom: 20px;
+    }
+    .mgBtm10Mob {
+        margin-bottom: 10px;
+    }
+    .width100Mob {
+        width: 100%;
+    }
+}
+
+/*desktop*/
+@media only screen and (min-width: 768px) {
+    .mgRight10Des {
+        margin-right: 10px;
+    }
+}

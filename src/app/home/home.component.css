@@ -1,0 +1,35 @@
+
+.centerAlign {
+    text-align: center;
+    margin-top: 20px;
+}
+.mgTop0 {
+    margin-top: 0px;
+}
+.mgTop20 {
+    margin-top: 20px;
+}
+.mgBtm20 {
+    margin-bottom: 20px;
+}
+.mgRight10 {
+    margin-right: 10px;
+}
+.mgLeft20 {
+    margin-left: 20px;
+}
+.logoImg {
+    width: 200px;
+    margin: 20px auto;
+}
+.w100 {
+    width: 100%;
+}
+.logoutBtn {
+    width: 200px;
+    margin: auto;
+}
+.homeBtn {
+    width: 100%;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,71 @@
+<div *ngIf="gameEnded" class="countdownTopCont">
+    <div class="row">
+      <div class="col-12 pd0">
+        <div class="card countdownContainer">
+          <h1 class="countdown text50">Game Over!</h1>
+          <button class="btn btn-success mgTop20 countdown newGameBtn" routerLink="/new">New Game ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+<div *ngIf="countdownCount != 'finished'" class="countdownTopCont">
+  <div class="row">
+    <div class="col-12 pd0">
+      <div class="card countdownContainer">
+        <h1 class="countdown">{{ countdownCount }}</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container zIndex9">
+  <div class="row">
+    <div class="col-12">
+      <div *ngIf="cardList" class="card card mgTop20 mgBtm20">
+        <div class="card-body">
+          <div class="question row">
+            <h2 class="col-12">Q. {{ cardList[activeCard].question }}</h2>
+            <p class="col-12 pointsAvailable"><i>Points: {{ cardList[activeCard].points }}</i></p>
+          </div>
+          <div #answersList class="answersContainer row">
+            <div class="col-12 col-md-6">
+                <button class="btn btn-primary answer" (click)="selectedAnswer(cardList[activeCard].correctAnswer)">{{ cardList[activeCard].correctAnswer }}</button>
+            </div>
+            <div class="col-12 col-md-6">
+                <button class="btn btn-primary answer" (click)="selectedAnswer(cardList[activeCard].fakeAnswer1)">{{ cardList[activeCard].fakeAnswer1 }}</button>
+            </div>
+            <div class="col-12 col-md-6">
+                <button class="btn btn-primary answer" (click)="selectedAnswer(cardList[activeCard].fakeAnswer2)">{{ cardList[activeCard].fakeAnswer2 }}</button>
+            </div>
+            <div class="col-12 col-md-6">
+                <button class="btn btn-primary answer" (click)="selectedAnswer(cardList[activeCard].fakeAnswer3)">{{ cardList[activeCard].fakeAnswer3 }}</button>
+            </div>
+          </div>
+          <div *ngIf="fb.gameBS | async as gameObj" class="row mgTop20">
+            <div class="col-12">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Score</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of gameObj[0].players; let i = index">
+                      <th scope="row">{{ data.firstName }} {{ data.lastName }}</th>
+                      <td>{{ data.score }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-12">
+              <p *ngIf="!gameObj[0].winner" class="scoreNeeded">Score needed to win: {{ gameObj[0].winningScore }}</p>
+              <p *ngIf="gameObj[0].winner" class="scoreNeeded" (appAfterIf)="showWinner(gameObj[0].winner)">The winner is <b>{{ gameObj[0].winner }}</b>. Well done!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

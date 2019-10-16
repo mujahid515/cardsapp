@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div *ngIf="fb.games" class="card w100 mgTop20 mgBtm20">
+        <div *ngIf="fb.games | async as gamesObj" class="card-body">
+            <h5 class="card-title">Join a Game</h5>
+            <div class="row mgBtm20">
+              <div class="col-12">
+                <p>I want to join a... </p>
+                <button class="btn btn-success width100Mob mgBtm10Mob mgRight10Des" (click)="joinPrivateGame()">Private Game</button>
+                <button class="btn btn-primary width100Mob" (click)="joinPublicGame()">Public Game</button>
+              </div>
+            </div>
+            <div *ngIf="privateGameSwitch" class="row">
+              <div class="col-12">
+                <p>Paste your game code here: </p>
+                <input type="text" class="col-12 col-md-9 mgBtm20 mgRight10" [(ngModel)]="privateGameCode" />
+                <button class="btn btn-primary col-12 col-md-2 mgBtm20 float-right" (click)="goToGame(privateGameCode)">Go ></button>
+              </div>
+            </div>
+            <div *ngIf="publicGameSwitch && gamesObj.length >= 1" class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Host</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Winning Score</th>
+                    <th scope="col">Total Players</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of gamesObj; let i = index">
+                    <th scope="row">{{ i+1 }}</th>
+                    <td>{{ data.players[0].firstName }} {{ data.players[0].lastName }}</td>
+                    <td>{{ data.category }}</td>
+                    <td>{{ data.winningScore }}</td>
+                    <td>{{ data.players.length }}</td>
+                    <td><button class="btn btn-success" (click)="goToGame(data.gid)">Go</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div *ngIf="publicGameSwitch && gamesObj.length == 0" class="row">
+              <div class="col-12">
+                <p>No public games! Why not create one yourself? </p>
+                <button class="btn btn-primary col-12 col-md-2 mgBtm20 float-right" routerLink="/new">Create Game ></button>
+              </div>
+            </div>
+            <button class="btn btn-danger float-right mgRight10Des width100Mob" routerLink="/">Cancel x</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

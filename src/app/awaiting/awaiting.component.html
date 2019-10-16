@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div *ngIf="fb.game && currentUser" class="card w100 mgTop20 mgBtm20">
+        <div *ngIf="fb.gameBS | async as gameObj" class="card-body">
+            <h5 *ngIf="currentUser.uid == gameObj[0].players[0].uid" class="card-title">Awaiting Players</h5>
+            <h5 *ngIf="currentUser.uid != gameObj[0].players[0].uid" class="card-title">Awaiting Host...</h5>
+            <div class="row">
+              <div class="col-12">
+                <p>Invite players using the game code: </p>
+                <input type="text" class="col-12 col-md-9 mgBtm20 mgRight10" readonly [value]="gameObj[0].gid" />
+                <button class="btn btn-primary col-12 col-md-2 mgBtm20 float-right" ngxClipboard [cbContent]="gameObj[0].gid">Copy</button>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th *ngIf="currentUser.uid == gameObj[0].players[0].uid" scope="col">Action</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of gameObj[0].players; let i = index">
+                    <th scope="row">{{ i+1 }}</th>
+                    <td>{{ data.firstName }} {{ data.lastName }}</td>
+                    <td *ngIf="data.host && currentUser.uid == gameObj[0].players[0].uid">
+                      <button class="btn btn-primary width100" disabled>Host</button>
+                    </td>
+                    <td *ngIf="!data.host && currentUser.uid == gameObj[0].players[0].uid">
+                      <button *ngIf="!data.active" class="btn btn-success width100Mob mgBtm10Mob mgRight10Des" (click)="acceptPlayer(gameObj[0], data.uid)">Accept</button>
+                      <button *ngIf="data.active" class="btn btn-danger width100Mob" (click)="rejectPlayer(gameObj[0], data.uid)">Reject</button>
+                    </td>
+                    <td *ngIf="data.active">
+                      <button class="btn btn-success width100" disabled>Accepted</button>
+                    </td>
+                    <td *ngIf="!data.active">
+                      <button class="btn btn-danger width100" disabled>Waiting</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p *ngIf="currentUser.uid == gameObj[0].players[0].uid && gameObj[0].players.length == 1 && !atLeastOne" class="mgBtm20Mob width100Mob centerAlign"><i>Please wait for other players to join...</i></p>
+            <p *ngIf="currentUser.uid == gameObj[0].players[0].uid && gameObj[0].players.length > 1 && !atLeastOne" class="mgBtm20Mob width100Mob centerAlign"><i>Please accept at least one player to start...</i></p>
+            <button *ngIf="currentUser.uid == gameObj[0].players[0].uid && gameObj[0].players.length > 1 && atLeastOne" type="submit" class="btn btn-success float-right mgBtm20Mob width100Mob" (click)="startGame(gameObj[0])">Start Game ></button>
+            <p *ngIf="currentUser.uid != gameObj[0].players[0].uid && !gameObj[0].active" class="mgBtm20Mob width100Mob centerAlign"><i>Please wait for the host to start. Your game will begin soon...</i></p>
+            <button *ngIf="currentUser.uid != gameObj[0].players[0].uid && gameObj[0].active" type="submit" class="btn btn-success float-right mgBtm20Mob width100Mob" (appAfterIf)="startGameForGuest(gameObj[0])">Start Game ></button>
+            <button class="btn btn-danger float-right mgRight10Des width100Mob" (click)="cancelGame(gameObj[0])">Cancel x</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

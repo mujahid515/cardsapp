@@ -1,0 +1,76 @@
+.mgTop0 {
+    margin-top: 0px;
+}
+.mgTop20 {
+    margin-top: 20px;
+}
+.mgBtm20 {
+    margin-bottom: 20px;
+}
+.mgRight10 {
+    margin-right: 10px;
+}
+.mgLeft20 {
+    margin-left: 20px;
+}
+.pd0 {
+    padding: 0px;
+}
+.w100 {
+    width: 100%;
+}
+.margin0 {
+    margin: 0px;
+}
+.countdownTopCont {
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+}
+.countdown {
+    text-align: center;
+    font-size: 150px;
+    color: #fff;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    padding: 20px;
+}
+.text50 {
+    font-size: 50px;
+}
+.newGameBtn {
+    top: 65%;
+    font-size: 20px;
+    width: auto;
+}
+.countdownContainer {
+    background-color: rgba(0,0,0,0.8);
+    padding: 20px;
+    margin: auto;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+.zIndex10 {
+    z-index: 10;
+}
+.question {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.pointsAvailable {
+    text-align: center;
+    margin-top: 20px;
+}
+.answer {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.scoreNeeded {
+    text-align: center;
+    margin-bottom: 0px;
+}
